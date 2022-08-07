@@ -1,15 +1,24 @@
 package datamodels;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "utente")
 public class Utente {
 	
+	private int id;
 	private String nome;
 	private String  cognome;
 	private int dataNascita;
 	private String numeroTessera;
 	
 	
-	public Utente(String nome, String cognome, int dataNascita, String numeroTessera) {
-
+	public Utente(int id,String nome, String cognome, int dataNascita, String numeroTessera) {
+		this.id = id;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.dataNascita = dataNascita;
@@ -20,6 +29,18 @@ public class Utente {
 	public Utente() {
 
 		
+	}
+	
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 
@@ -65,9 +86,11 @@ public class Utente {
 
 	@Override
 	public String toString() {
-		return String.format("Utente [nome=%s, cognome=%s, dataNascita=%s, numeroTessera=%s]", nome, cognome,
+		return String.format("Utente [id=%s, nome=%s, cognome=%s, dataNascita=%s, numeroTessera=%s]", id, nome, cognome,
 				dataNascita, numeroTessera);
 	}
+
+
 	
 	
 	

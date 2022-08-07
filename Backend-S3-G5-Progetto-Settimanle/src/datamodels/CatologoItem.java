@@ -1,25 +1,60 @@
 package datamodels;
 
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+
+import javax.persistence.Table;
+
 //import java.util.Objects;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "catologoItems")
 
-	public class CatologoItem { //implements  {
+	public abstract class CatologoItem { //implements  {
 		
-		
+		private int id;
 		private String codiceISBN;
 		private String titolo;
 		private int annoPubblicato;
 		private int numeroPagine;
+		private Prestito prestito;
+		
+		public CatologoItem(int id, String codiceISBN, String titolo, int annoPubblicato, int numeroPagine) {
+			this.id = id;
+			this.codiceISBN = codiceISBN;
+			this.titolo = titolo;
+			this.annoPubblicato = annoPubblicato;
+			this.numeroPagine = numeroPagine;
+			
+		}
 		
 		public CatologoItem(String codiceISBN, String titolo, int annoPubblicato, int numeroPagine) {
 			this.codiceISBN = codiceISBN;
 			this.titolo = titolo;
 			this.annoPubblicato = annoPubblicato;
 			this.numeroPagine = numeroPagine;
+			
 		}
 		
 		public CatologoItem() {
 
+		}
+		
+		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
 		}
 
 		public String getCodiceISBN() {
@@ -54,13 +89,24 @@ package datamodels;
 			this.numeroPagine = numeroPagine;
 		}
 
-		
+		@ManyToOne 
+		public Prestito getPrestito() {
+			return prestito;
+		}
+
+		public void setPrestito(Prestito prestito) {
+			this.prestito = prestito;
+		}
+
+		@Override
 		public String toString() {
-			return 
-			String.format("Items{codiceISBN: %s, titolo: %s, annoPubblicato: %s, numeroPagine: %s", codiceISBN, titolo, annoPubblicato, numeroPagine);
-			
-				
-			}
+			return String.format(
+					"CatologoItem [id=%s, codiceISBN=%s, titolo=%s, annoPubblicato=%s, numeroPagine=%s, prestito=%s]",
+					id, codiceISBN, titolo, annoPubblicato, numeroPagine, prestito);
+		}
+
+	
+		
 	
 //
 //		 @Override

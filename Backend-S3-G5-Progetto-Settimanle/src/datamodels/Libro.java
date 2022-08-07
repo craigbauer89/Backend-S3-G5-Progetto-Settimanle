@@ -1,21 +1,35 @@
 package datamodels;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 //import it.epicode.serialization.exceptions.ClassMismatchException;
 //import it.epicode.serialization.exceptions.VersionMismatchException;
 
+@Entity
+@Table(name = "libri")
 public class Libro extends CatologoItem {
 	
 	
 	private String autore;
 	private String genere;
 	
-	
-	public Libro(String codiceISBN, String titolo, int annoPubblicato, int numeroPagine, String autore, String genere) {
+	public Libro(String codiceISBN, String titolo, int annoPubblicato, int numeroPagine,
+			String autore, String genere) {
 		super(codiceISBN, titolo, annoPubblicato, numeroPagine);
 		this.autore = autore;
 		this.genere = genere;
 	}
 	
+//	
+//	public Libro(int id, String codiceISBN, String titolo, int annoPubblicato, int numeroPagine,
+//			String autore, String genere) {
+//		super(id, codiceISBN, titolo, annoPubblicato, numeroPagine);
+//		this.autore = autore;
+//		this.genere = genere;
+//	}
+
+
 	public Libro() {
 		super();
 	}
@@ -39,22 +53,22 @@ public class Libro extends CatologoItem {
 	public void setGenere(String genere) {
 		this.genere = genere;
 	}
-	
-	
-	@Override
-	public boolean equals(Object obj) {
-		return obj instanceof Libro; //&& this.hashCode() == obj.hashCode();
-	}
-
 
 	@Override
 	public String toString() {
-		return 
-		String.format("Items{codiceISBN: %s, titolo: %s, annoPubblicato: %s, numeroPagine: %s, autore: %s, genere: %s", getCodiceISBN(), getTitolo(), getAnnoPubblicato(), getNumeroPagine(), autore, genere);
-		
-			
-		}
+		return String.format("Libro [autore=%s, genere=%s]",super.toString(), autore, genere);
+	}
+
+
 	
+//	
+//	@Override
+//	public boolean equals(Object obj) {
+//		return obj instanceof Libro; //&& this.hashCode() == obj.hashCode();
+//	}
+
+
+
 	
 //	@Override
 //	public String toCsv() {

@@ -1,19 +1,30 @@
 package datamodels;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 //import it.epicode.datamodels.Frequency;
 //import it.epicode.serialization.exceptions.ClassMismatchException;
 //import it.epicode.serialization.exceptions.VersionMismatchException;
 
+@Entity
+@Table(name = "riviste")
 public class Rivista extends CatologoItem {
 
 	private Period period;
-
-	public Rivista(String codiceISBN, String titolo, int annoPubblicato, int numeroPagine, Period period) {
+	
+	public Rivista(String codiceISBN, String titolo, int annoPubblicato, int numeroPagine, 
+			Period period) {
 		super(codiceISBN, titolo, annoPubblicato, numeroPagine);
 		this.period = period;
 	}
 	
-	
+	public Rivista(int id, String codiceISBN, String titolo, int annoPubblicato, int numeroPagine, 
+			Period period) {
+		super(id, codiceISBN, titolo, annoPubblicato, numeroPagine);
+		this.period = period;
+	}
+
 	public Rivista() {
 		super();
 	}
@@ -26,13 +37,13 @@ public class Rivista extends CatologoItem {
 		this.period = period;
 	}
 
+
 	@Override
 	public String toString() {
-		return 
-		String.format("Items{codiceISBN: %s, titolo: %s, annoPubblicato: %s, numeroPagine: %s, period: %s", getCodiceISBN(), getTitolo(), getAnnoPubblicato(), getNumeroPagine(), period);
-		
-			
-		}
+		return String.format("Rivista [period=%s]",super.toString(), period);
+	}
+
+	
 
 //	@Override
 //	public String toCsv() {
